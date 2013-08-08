@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="constructor">
+    <bean class="org.jetbrains.buildServer.commitTags.VcsModificationListener"/>
+    <bean class="org.jetbrains.buildServer.commitTags.TagsStorage"/>
+    <bean class="org.jetbrains.buildServer.commitTags.TagsMatcher"/>
+    <bean class="org.jetbrains.buildServer.commitTags.ProjectRules"/>
+    <bean class="org.jetbrains.buildServer.commitTags.web.EditRulesController"/>
+    <bean class="org.jetbrains.buildServer.commitTags.web.ProjectRulesTab"/>
+</beans>
