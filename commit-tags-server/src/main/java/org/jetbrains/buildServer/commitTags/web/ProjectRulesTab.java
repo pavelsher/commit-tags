@@ -8,20 +8,27 @@ import jetbrains.buildServer.web.openapi.PluginDescriptor;
 import jetbrains.buildServer.web.openapi.SimpleCustomTab;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.buildServer.commitTags.ProjectRules;
+import org.jetbrains.buildServer.commitTags.TagsStorage;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 public class ProjectRulesTab extends SimpleCustomTab {
   private final ProjectManager myProjectManager;
+  private final ProjectRules myProjectRules;
 
-  public ProjectRulesTab(@NotNull PagePlaces pagePlaces, @NotNull PluginDescriptor pluginDescriptor, @NotNull ProjectManager projectManager) {
+  public ProjectRulesTab(@NotNull PagePlaces pagePlaces,
+                         @NotNull PluginDescriptor pluginDescriptor,
+                         @NotNull ProjectManager projectManager,
+                         @NotNull ProjectRules projectRules) {
     super(pagePlaces);
     myProjectManager = projectManager;
+    myProjectRules = projectRules;
     setPlaceId(PlaceId.EDIT_PROJECT_PAGE_TAB);
     setPluginName(pluginDescriptor.getPluginName());
     setTabTitle("Change Tags");
-    setIncludeUrl("/admin/commitTags/editRules.html");
+    setIncludeUrl(pluginDescriptor.getPluginResourcesPath("editRules.jsp"));
     register();
   }
 
@@ -33,7 +40,11 @@ public class ProjectRulesTab extends SimpleCustomTab {
   @Override
   public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
     super.fillModel(model, request);
-    model.put("currentProject", getProject(request));
+    SProject project = getProject(request);
+    if (project != null) {
+      model.put("currentProject", project);
+      model.put("rulesBean", new TagRulesBean(myProjectRules.getRules(project)));
+    }
   }
 
   @Nullable

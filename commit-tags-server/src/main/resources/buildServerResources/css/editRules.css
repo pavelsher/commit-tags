@@ -1,0 +1,7 @@
+#editTagRuleFormDialog table th {
+    text-align: left;
+}
+
+#editTagRuleFormDialog input.longField {
+    width: 18em;
+}

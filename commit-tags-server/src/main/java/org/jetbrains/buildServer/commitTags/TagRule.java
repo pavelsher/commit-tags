@@ -16,5 +16,8 @@ public abstract class TagRule {
     return myTag;
   }
 
-  public abstract boolean isMatched(@NotNull SVcsModification modification);
+  public abstract boolean matches(@NotNull SVcsModification modification);
+
+  @NotNull
+  public abstract String getDescription();
 }

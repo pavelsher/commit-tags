@@ -17,7 +17,7 @@ public class FilePathRegexpRule extends TagRule {
   }
 
   @Override
-  public boolean isMatched(@NotNull SVcsModification modification) {
+  public boolean matches(@NotNull SVcsModification modification) {
     for (VcsFileModification file: modification.getChanges()) {
       Matcher matcher = myPattern.matcher(file.getFileName());
       if (matcher.find()) {
@@ -25,5 +25,11 @@ public class FilePathRegexpRule extends TagRule {
       }
     }
     return false;
+  }
+
+  @NotNull
+  @Override
+  public String getDescription() {
+    return myPattern.toString();
   }
 }

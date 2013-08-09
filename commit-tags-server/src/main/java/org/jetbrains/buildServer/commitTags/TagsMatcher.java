@@ -22,7 +22,7 @@ public class TagsMatcher {
     for (SProject project: mod.getRelatedProjects()) {
       List<TagRule> rules = myProjectRules.getRules(project);
       for (TagRule r: rules) {
-        if (r.isMatched(mod)) {
+        if (r.matches(mod)) {
           tags.add(r.getTag());
         }
       }

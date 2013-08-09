@@ -12,12 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class EditRulesController extends BaseController {
-  private final WebControllerManager myWebControllerManager;
   private final PluginDescriptor myPluginDescriptor;
 
   public EditRulesController(@NotNull WebControllerManager webControllerManager, @NotNull PluginDescriptor pluginDescriptor) {
-    myWebControllerManager = webControllerManager;
-    myWebControllerManager.registerController("/admin/commitTags/editRules.html", this);
+    webControllerManager.registerController("/admin/" + pluginDescriptor.getPluginName() + "/editRules.html", this);
     myPluginDescriptor = pluginDescriptor;
   }
 
